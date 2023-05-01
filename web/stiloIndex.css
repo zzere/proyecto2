@@ -1,0 +1,38 @@
+html{
+   font-family: 'Bebas Neue', cursive;
+}
+
+body{
+    margin: 0;
+}
+
+#barra{
+    background-color: black;
+}
+
+#barra ul{
+    list-style: none;
+    text-align: right;
+    padding: 1rem 3rem;
+}
+
+#barra h1{
+    color: white;
+    text-align: left;
+    margin: 0 59rem 0 0 ;
+    display: inline;
+}
+
+#barra li {
+    display: inline;
+    text-align: center;
+    margin: 0 10px 0 0;
+}
+
+#barra li a{
+    padding: 2px 7px 2px 7px;
+    color: #666;
+    background-color: #eeeeee;
+    border: 1px solid #ccc;
+    text-decoration: none;
+}

@@ -1,0 +1,17 @@
+html{
+    font-family: 'Bruno Ace SC', cursive;
+}
+body{
+    margin: 0;
+    text-align: center;
+}
+
+header{
+    background-color: black;
+    color: white;
+    padding: 1rem 2rem;
+}
+
+input{
+    border-radius: 10px ;
+}
