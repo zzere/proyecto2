@@ -38,7 +38,7 @@ public class RegistrarUsuario extends HttpServlet {
             informante.setTelefono(telefono);
             informante.setGenero(genero);
             informante.setEdad(edad);
-            //dao.registrar(informante);
+            dao.registrar(informante);
             
             
             //Se redirecciona a usuario
