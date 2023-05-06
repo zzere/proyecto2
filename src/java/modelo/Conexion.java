@@ -1,68 +1,46 @@
-
 package modelo;
+
 import java.sql.*;
-import javax.swing.JOptionPane;
 
-
+/**
+ *
+ * @author sebas
+ */
 public class Conexion {
 
-    
-    //se crea constructor privado. No permite hacer instancias, lo que obliga a usar el patron singleton
-    private Conexion(){
-        
-    }
-    
-
     private static Connection conexion;
-    
-    private static Conexion instancia;
-    
-    private static final String url = "jdbc:mysql://localhost/bd_appRobos";
-    private static final String root = "root";
-    private static final String password = "1233";
-    
-    //retorna la conexion a la bd
-    public Connection  conectar(){
-        
-        try {
-            //debe cargar el drive para hacer la conexion
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //nos conectamos a la bd, conexion guarda la direccion a donde conectar
-            conexion = DriverManager.getConnection(url, root, password);
-            
-            JOptionPane.showMessageDialog(null, "conexion exitosa");
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+    private static final String driver = "com.mysql.jdbc.Driver";
+    private static final String usuario = "root";
+    private static final String password = "";
+    private static final String url = "jdbc:mysql://localhost:3306/test";
+    private static String mensaje;
+
+    public static Connection getConexion() {
+        if (conexion != null) {
+            return conexion;
         }
-        return conexion;
-        
+        try {
+            Class.forName(driver);
+            conexion = DriverManager.getConnection(url, usuario, password);
+            mensaje = "Conectado a la base de datos";
+            return conexion;
+        } catch (Exception e) {
+            mensaje = e.getMessage();
+            return null;
+        }
     }
-    
-    
-    public void cerrarConexion() throws SQLException{
+
+    public static void cerrar(){
         try {
             conexion.close();
-            System.out.println("Desconectado de la base de datos");
+            mensaje="Conexion cerrada";
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-            conexion.close();
-        }
-        finally{
-            conexion.close();
+            mensaje="Problemas al cerrar la conexion";
         }
     }
     
-    //recuerda usar conexion.close en finally cada que se abra
-    
-    
-    
-    //ponemos patron singleton. Va a ser del tipo al que vamos a dejar singleton
-    public static Conexion getInstance(){ //se pone static para llamar a la clase y no tner que hacer instancias del new
-        if(instancia == null){
-            instancia = new Conexion(); //si esta vacio lo pasamos de var a obj. SI la inst esta vacia crea una nueva.
-        }
-        return instancia; //si la inst esta nula, la retorna
+    public static String getMensaje(){
+        return mensaje;
     }
-    
+
 }

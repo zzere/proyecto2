@@ -4,46 +4,46 @@
  */
 package controlador;
 
+import modelo.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import modelo.DAOInformanteImplementacion;
-import modelo.Informante;
 
-
-@WebServlet(name = "registrarusuario", urlPatterns = {"/registrarusuario"})
-public class RegistrarUsuario extends HttpServlet {
-
-    DAOInformanteImplementacion dao = new DAOInformanteImplementacion();
-    Informante informante;
+/**
+ *
+ * @author sebas
+ */
+@WebServlet(name = "ControladorRobo", urlPatterns = {"/ControladorRobo"})
+public class ControladorRobo extends HttpServlet {
     
+    private Datos_Robo dRobo = new Datos_Robo();
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-
-            //int id = Integer.parseInt(request.getParameter("txtId"));
-            String nombre = request.getParameter("txtNombre");
-            String apellido = request.getParameter("txtApellido");
-            String correo = request.getParameter("txtCorreo");
-            String contraseña = request.getParameter("txtContraseña");
-            String telefono = request.getParameter("txtTelefono");
-            String genero = request.getParameter("txtGenero");
-            int edad = Integer.parseInt(request.getParameter("txtEdad"));
-            informante = new Informante(apellido, correo, edad, 1, nombre, apellido, correo, contraseña);
-            informante.setTelefono(telefono);
-            informante.setGenero(genero);
-            informante.setEdad(edad);
-            //dao.registrar(informante);
+        try ( PrintWriter out = response.getWriter()) {
             
+            String tarea=request.getParameter("accion");
             
-            //Se redirecciona a usuario
-            request.getRequestDispatcher("homeForm.html").forward(request, response);
-
+            switch(tarea){
+                case "agregar": registrar(request, response);
+                    break;
+                case "Update": actualizar(request, response);
+                    break;
+            }
             
         }
     }
@@ -86,5 +86,30 @@ public class RegistrarUsuario extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+private void registrar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
+        String ciudad = request.getParameter("txtCiudad");
+        String barrio = request.getParameter("txtBarrio");
+        ciudad = ciudad.toUpperCase();
+        barrio = barrio.toUpperCase();
+
+        Robo robo = new Robo(ciudad, barrio,0);
+
+        boolean agregado = dRobo.agregarRobo(robo);
+
+        String mensaje = dRobo.getMensaje();
+
+        response.sendRedirect(request.getContextPath() + "/frmCiudad.jsp?mensaje=" + mensaje);
+    }
+    
+    private void actualizar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        
+        int id= Integer.parseInt(request.getParameter("Ciudad"));
+        
+        dRobo.aumentarRobo(id);
+        
+        response.sendRedirect(request.getContextPath() + "/frmRobo.jsp?mensaje="+dRobo.getMensaje());
+    }
 }
