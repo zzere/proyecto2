@@ -36,7 +36,7 @@
             <input type="submit" value="Reportar">
         </form>
             
-        <a href="index.html">home</a>
+        <a href="index.jsp">home</a>
         <% 
             String mensaje= request.getParameter("mensaje");
             if(mensaje!= null){

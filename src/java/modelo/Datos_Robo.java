@@ -2,6 +2,7 @@
 package modelo;
 
 import java.sql.*;
+import java.util.ArrayList;
 /**
  *
  * @author sebas
@@ -31,6 +32,7 @@ public class Datos_Robo {
                 r.setnRobos(rs.getInt(4));
 
             }
+            mensaje="Robo agregado Correctamente";
         } catch (Exception e) {
         }
     }
@@ -51,7 +53,7 @@ public class Datos_Robo {
             
             if(ps.executeUpdate()>0){
                 agregado=true;
-                mensaje="robo agregado correctamente";
+                mensaje="Ciudad agregada correctamente";
             }
         } catch (Exception e) {
             mensaje= e.getMessage();
@@ -72,4 +74,49 @@ public class Datos_Robo {
         }
     }
     
+    public String[] arrayCiudades(){
+     
+        String sql="SELECT ciudad,sum(nrobos) as nrobos FROM `ciudad` WHERE 1 group by ciudad order by ciudad DESC;";
+        ArrayList<String> dB = new ArrayList<>();
+        
+        try {
+            ps=miConexion.prepareStatement(sql);
+            rs=ps.executeQuery();
+            
+            while (rs.next()) {
+                
+                dB.add(rs.getString(1));
+                
+            }
+            
+            String[] array= dB.toArray(new String[0]);
+            return array;
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
+    
+    public Integer[] arrayRobos(){
+     
+        String sql="SELECT ciudad,sum(nrobos) as nrobos FROM `ciudad` WHERE 1 group by ciudad order by ciudad DESC;";
+        ArrayList<Integer> dB = new ArrayList<>();
+        
+        try {
+            ps=miConexion.prepareStatement(sql);
+            rs=ps.executeQuery();
+            
+            while (rs.next()) {
+                
+                dB.add(rs.getInt(2));
+                
+            }
+            
+            Integer[] array= dB.toArray(new Integer[0]);
+            return array;
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
 }

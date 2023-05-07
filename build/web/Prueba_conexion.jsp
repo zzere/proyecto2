@@ -27,6 +27,6 @@
         %>
         
         
-        <a href="index.html">home</a>
+        <a href="index.jsp">home</a>
     </body>
 </html>
