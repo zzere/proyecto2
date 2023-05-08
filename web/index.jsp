@@ -30,6 +30,8 @@
                 <li><a href="frmCiudad.jsp">Registrar Ciudad</a></li>
                 <li><a href="Prueba_conexion.jsp">prueba conexion</a></li>
                 <li><a href="frmRobo.jsp">Reportar Robo</a></li>
+                <li><a href="decrementarRobo.jsp">Decrementar Robo</a></li>
+                <li><a href="eliminarCiudad.jsp">Eliminar ciudad</a></li>
             </ul>
         </div>
         <% 

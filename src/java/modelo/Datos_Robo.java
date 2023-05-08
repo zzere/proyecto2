@@ -32,7 +32,7 @@ public class Datos_Robo {
                 r.setnRobos(rs.getInt(4));
 
             }
-            mensaje="Robo agregado Correctamente";
+            
         } catch (Exception e) {
         }
     }
@@ -41,7 +41,7 @@ public class Datos_Robo {
         return mensaje;
     }
     
-    public boolean agregarRobo(Robo robo){
+    public boolean agregarCiudad(Robo robo){
         boolean agregado=false;
         String consulta="insert into ciudad values (null,?,?,?)";
         try {
@@ -61,6 +61,18 @@ public class Datos_Robo {
         return agregado;
     }
     
+    public void eliminarCiudad(int id){
+        String sql="DELETE FROM `ciudad` WHERE `id`="+id;
+        
+        try {
+            ps = miConexion.prepareStatement(sql);
+            ps.executeUpdate();
+            mensaje="Ciudad eliminada correctamente";
+        } catch (Exception e) {
+            mensaje="problemas al eliminar";
+        }
+    }
+    
     public void aumentarRobo(int id){
         
         cargarRoboID(id);
@@ -70,6 +82,27 @@ public class Datos_Robo {
         try {
             ps = miConexion.prepareStatement(sql);
             ps.executeUpdate();
+            mensaje="Robo agregado Correctamente";
+        } catch (Exception e) {
+        }
+    }
+    
+    public void decrementarRobo(int id){
+        cargarRoboID(id);
+        int nRobo= r.getnRobos()-1;
+        if(nRobo<0){
+            nRobo=0;
+        }
+        String sql = "UPDATE `ciudad` SET `nrobos`='"+nRobo+"' WHERE `id`="+id;
+        
+        try {
+            ps = miConexion.prepareStatement(sql);
+            ps.executeUpdate();
+            if(nRobo==0){
+                mensaje="no hay robos en esta area. No se puede decrementar";
+            }else{
+                mensaje="Robo decrementado correctamente";
+            }
         } catch (Exception e) {
         }
     }

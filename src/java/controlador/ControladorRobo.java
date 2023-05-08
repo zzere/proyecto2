@@ -43,6 +43,10 @@ public class ControladorRobo extends HttpServlet {
                     break;
                 case "Update": actualizar(request, response);
                     break;
+                case "DecRobo": decRobo(request, response);
+                    break;
+                case "EliminarC": eliminarC(request, response);
+                    break;
             }
             
         }
@@ -86,7 +90,7 @@ public class ControladorRobo extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-private void registrar(HttpServletRequest request, HttpServletResponse response)
+    private void registrar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String ciudad = request.getParameter("txtCiudad");
@@ -96,11 +100,22 @@ private void registrar(HttpServletRequest request, HttpServletResponse response)
 
         Robo robo = new Robo(ciudad, barrio,0);
 
-        boolean agregado = dRobo.agregarRobo(robo);
+        boolean agregado = dRobo.agregarCiudad(robo);
 
         String mensaje = dRobo.getMensaje();
 
         response.sendRedirect(request.getContextPath() + "/frmCiudad.jsp?mensaje=" + mensaje);
+    }
+    
+    private void eliminarC(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        
+        int id= Integer.parseInt(request.getParameter("Ciudad"));
+        
+        dRobo.eliminarCiudad(id);
+        
+        response.sendRedirect(request.getContextPath() + "/frmRobo.jsp?mensaje="+dRobo.getMensaje());
+        
     }
     
     private void actualizar(HttpServletRequest request, HttpServletResponse response)
@@ -112,4 +127,16 @@ private void registrar(HttpServletRequest request, HttpServletResponse response)
         
         response.sendRedirect(request.getContextPath() + "/frmRobo.jsp?mensaje="+dRobo.getMensaje());
     }
+    
+    private void decRobo(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        
+        int id= Integer.parseInt(request.getParameter("Ciudad"));
+        
+        dRobo.decrementarRobo(id);
+        
+        response.sendRedirect(request.getContextPath() + "/frmRobo.jsp?mensaje="+dRobo.getMensaje());
+    }
+    
+    
 }
