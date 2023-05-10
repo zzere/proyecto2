@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @author sebas
  */
-public class Datos_Robo {
+public class Datos_Robo implements IdatosRobo{
     
     private Connection miConexion;
     private PreparedStatement ps;
@@ -150,6 +150,54 @@ public class Datos_Robo {
         } catch (Exception e) {
             return null;
         }
+    }
+    
+    public String[] arrayBarrios(String ciudad){
+     
+        String sql="SELECT * FROM `ciudad` WHERE `ciudad`=\""+ciudad+"\";";
+        ArrayList<String> dB = new ArrayList<>();
         
+        try {
+            ps=miConexion.prepareStatement(sql);
+            rs=ps.executeQuery();
+            
+            while (rs.next()) {
+                
+                dB.add(rs.getString(3));
+                
+            }
+            
+            String[] array= dB.toArray(new String[0]);
+            mensaje="array enviado";
+            return array;
+        } catch (Exception e) {
+            mensaje="problemas con array";
+            return null;
+        }
+        
+    }
+    
+    public Integer[] arrayRobos(String ciudad){
+     
+        String sql="SELECT * FROM `ciudad` WHERE `ciudad`=\""+ciudad+"\";";
+        ArrayList<Integer> dB = new ArrayList<>();
+        
+        try {
+            ps=miConexion.prepareStatement(sql);
+            rs=ps.executeQuery();
+            
+            while (rs.next()) {
+                
+                dB.add(rs.getInt(4));
+                
+            }
+            
+            Integer[] array= dB.toArray(new Integer[0]);
+            mensaje="array enviado";
+            return array;
+        } catch (Exception e) {
+            mensaje="problemas con array";
+            return null;
+        }
     }
 }
