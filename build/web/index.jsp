@@ -43,7 +43,7 @@
                 
             %>
  
-        <canvas id="MiGrafica" width="auto" height="auto"></canvas>
+        <canvas id="MiGrafica" width="400 rem" height="auto"></canvas>
         
         
         <script>
