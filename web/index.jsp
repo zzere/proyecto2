@@ -32,6 +32,7 @@
                 <li><a href="frmRobo.jsp">Reportar Robo</a></li>
                 <li><a href="decrementarRobo.jsp">Decrementar Robo</a></li>
                 <li><a href="eliminarCiudad.jsp">Eliminar ciudad</a></li>
+                <li><a href="robosPorCiudad.jsp">Robos por ciudad</a></li>
             </ul>
         </div>
         <% 

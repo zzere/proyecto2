@@ -47,6 +47,8 @@ public class ControladorRobo extends HttpServlet {
                     break;
                 case "EliminarC": eliminarC(request, response);
                     break;
+                case "PorCiudad": robosC(request,response);
+                    break;
             }
             
         }
@@ -138,5 +140,15 @@ public class ControladorRobo extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/frmRobo.jsp?mensaje="+dRobo.getMensaje());
     }
     
+    private void robosC(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        
+        String ciudad = request.getParameter("Ciudad");
+        
+        ControladorD.barrios(ciudad);
+        ControladorD.robosC(ciudad);
+        
+        response.sendRedirect(request.getContextPath() + "/robosPorCiudad.jsp?mensaje="+ControladorD.getmensje());
+    }
     
 }
