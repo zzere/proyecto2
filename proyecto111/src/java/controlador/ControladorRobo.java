@@ -1,6 +1,9 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package controlador;
 
-import com.google.gson.Gson;
 import modelo.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,8 +19,8 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ControladorRobo", urlPatterns = {"/ControladorRobo"})
 public class ControladorRobo extends HttpServlet {
-
-    private Datos_Robo dRobo = new Datos_Robo();
+    
+    private DAORoboImplementacion dRobo = new DAORoboImplementacion();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,14 +43,14 @@ public class ControladorRobo extends HttpServlet {
                     break;
                 case "Update": actualizar(request, response);
                     break;
-            }
-            /*
-            String tarea = request.getParameter("accion");
-            switch (tarea) {
-                case "Registar": registrar(request, response);
+                case "DecRobo": decRobo(request, response);
+                    break;
+                case "EliminarC": eliminarC(request, response);
+                    break;
+                case "PorCiudad": robosC(request,response);
                     break;
             }
-            */
+            
         }
     }
 
@@ -89,25 +92,6 @@ public class ControladorRobo extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private void registrar2(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String ciudad = request.getParameter("txtCiudad");
-        String barrio = request.getParameter("txtBarrio");
-        ciudad = ciudad.toUpperCase();
-        barrio = barrio.toUpperCase();
-
-        Robo robo = new Robo(ciudad, barrio,0);
-
-        boolean agregado = dRobo.agregarRobo(robo);
-
-        PrintWriter out= response.getWriter();
-        String json=new Gson().toJson(agregado);
-        out.print(json);
-        
-    }
-    
     private void registrar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -118,11 +102,22 @@ public class ControladorRobo extends HttpServlet {
 
         Robo robo = new Robo(ciudad, barrio,0);
 
-        boolean agregado = dRobo.agregarRobo(robo);
+        boolean agregado = dRobo.agregarCiudad(robo);
 
         String mensaje = dRobo.getMensaje();
 
         response.sendRedirect(request.getContextPath() + "/frmCiudad.jsp?mensaje=" + mensaje);
+    }
+    
+    private void eliminarC(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        
+        int id= Integer.parseInt(request.getParameter("Ciudad"));
+        
+        dRobo.eliminarCiudad(id);
+        
+        response.sendRedirect(request.getContextPath() + "/eliminarCiudad.jsp?mensaje="+dRobo.getMensaje());
+        
     }
     
     private void actualizar(HttpServletRequest request, HttpServletResponse response)
@@ -134,5 +129,26 @@ public class ControladorRobo extends HttpServlet {
         
         response.sendRedirect(request.getContextPath() + "/frmRobo.jsp?mensaje="+dRobo.getMensaje());
     }
-
+    
+    private void decRobo(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        
+        int id= Integer.parseInt(request.getParameter("Ciudad"));
+        
+        dRobo.decrementarRobo(id);
+        
+        response.sendRedirect(request.getContextPath() + "/decrementarRobo.jsp?mensaje="+dRobo.getMensaje());
+    }
+    
+    private void robosC(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        
+        String ciudad = request.getParameter("Ciudad");
+        
+        ControladorD.barrios(ciudad);
+        ControladorD.robosC(ciudad);
+        
+        response.sendRedirect(request.getContextPath() + "/robosPorCiudad.jsp?mensaje="+ControladorD.getmensje());
+    }
+    
 }
