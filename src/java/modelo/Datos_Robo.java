@@ -89,21 +89,22 @@ public class Datos_Robo implements IdatosRobo{
     
     public void decrementarRobo(int id){
         cargarRoboID(id);
+        //boolean rr=false;
         int nRobo= r.getnRobos()-1;
         if(nRobo<0){
             nRobo=0;
+            mensaje="no hay robos en esta area. No se puede decrementar";
+        }else{
+            mensaje="Robo decrementado correctamente";
         }
         String sql = "UPDATE `ciudad` SET `nrobos`='"+nRobo+"' WHERE `id`="+id;
         
         try {
             ps = miConexion.prepareStatement(sql);
             ps.executeUpdate();
-            if(nRobo==0){
-                mensaje="no hay robos en esta area. No se puede decrementar";
-            }else{
-                mensaje="Robo decrementado correctamente";
-            }
+            
         } catch (Exception e) {
+            mensaje="Problemas al decrementar robo";
         }
     }
     
