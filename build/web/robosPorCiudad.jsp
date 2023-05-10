@@ -16,6 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="stylesheet" href="estiloDecrementarrobo.css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
@@ -35,19 +36,14 @@
             %>
             
             </select><br>
-            <input type="submit" value="Reportar">
+            <input type="submit" value="Ver">
         </form>
             
         <a href="index.jsp">home</a>
         <% 
             String mensaje= request.getParameter("mensaje");
             if(mensaje!= null){
-                
-                out.print(mensaje);
-                
-                
-                
-                
+
                 String[] barrios = ControladorD.getBarrios();
                 Integer[] robos = ControladorD.getnRobos();
                 

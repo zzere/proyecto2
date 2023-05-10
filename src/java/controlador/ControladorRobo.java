@@ -116,7 +116,7 @@ public class ControladorRobo extends HttpServlet {
         
         dRobo.eliminarCiudad(id);
         
-        response.sendRedirect(request.getContextPath() + "/frmRobo.jsp?mensaje="+dRobo.getMensaje());
+        response.sendRedirect(request.getContextPath() + "/eliminarCiudad.jsp?mensaje="+dRobo.getMensaje());
         
     }
     
@@ -137,7 +137,7 @@ public class ControladorRobo extends HttpServlet {
         
         dRobo.decrementarRobo(id);
         
-        response.sendRedirect(request.getContextPath() + "/frmRobo.jsp?mensaje="+dRobo.getMensaje());
+        response.sendRedirect(request.getContextPath() + "/decrementarRobo.jsp?mensaje="+dRobo.getMensaje());
     }
     
     private void robosC(HttpServletRequest request, HttpServletResponse response)
