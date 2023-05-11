@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import modelo.Conexion;
 import modelo.DAOInformanteImplementacion;
 import modelo.Informante;
 import modelo.Robo;
@@ -36,6 +37,7 @@ public class ControladorInformante extends HttpServlet {
                     break;
                 case "Eliminar": eliminar(request, response);
                     break;
+                case "verificar": verificarUsuario(request, response);
             }
             
         }
@@ -123,6 +125,27 @@ public class ControladorInformante extends HttpServlet {
         
         response.sendRedirect(request.getContextPath() + "/frmInformante.jsp?mensaje="+dInformante.getMensaje());
     }
-    
-    
+
+    private void verificarUsuario(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException{
+            
+        
+        String correo = request.getParameter("txtCorreo");
+        String contraseña = request.getParameter("txtContraseña");
+
+        boolean encontrado = dInformante.verificar(correo, contraseña);
+        
+        if(encontrado){
+            response.sendRedirect(request.getContextPath() + "/robosPorCiudad.jsp?mensaje="+dInformante.getMensaje());
+        }
+        else{
+            
+        }
+        
+    }
+        
+        
 }
+    
+    
+

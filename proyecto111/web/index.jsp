@@ -29,6 +29,9 @@
                 <li><a href="decrementarRobo.jsp">Decrementar Robo</a></li>
                 <li><a href="eliminarCiudad.jsp">Eliminar ciudad</a></li>
                 <li><a href="robosPorCiudad.jsp">Robos por ciudad</a></li>
+                
+                <li><a href="frmUsuario.jsp">Registrar usuario</a></li>
+                <li><a href="loginUsuario.jsp">Iniciar sesion</a></li>
             </ul>
         </div>
         <% 

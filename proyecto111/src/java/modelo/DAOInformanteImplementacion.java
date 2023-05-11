@@ -105,4 +105,28 @@ public class DAOInformanteImplementacion implements DAOInformante{
 
     }
     
+    public boolean verificar(String correo, String contraseña) {
+        String sql = "SELECT * FROM informante WHERE correo = ? AND contraseña = ?";
+        i = new Informante();
+        boolean encontrado = false;
+        try {
+            ps = miConexion.prepareStatement(sql);
+            ps.setString(1, correo);
+            ps.setString(2, contraseña);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                i.setId(rs.getInt(1));
+                i.setNombre(rs.getString(2));
+                i.setApellido(rs.getString(3));
+                i.setCorreo(rs.getString(4));
+                i.setContraseña(rs.getString(5));
+                i.setTelefono(rs.getString(6));
+                encontrado = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return encontrado;
+    }
+    
 }

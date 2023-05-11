@@ -51,19 +51,13 @@
                 
                 String b = gson.toJson(barrios);
                 String r = gson.toJson(robos);
-                
-            
-            
-            
+
         %>
         
         <canvas id="MiGrafica" width="auto" height="auto"></canvas>
         
         <script>
-            
-            
-            
-            
+
             var ciudades= <%=b%>;
             var robos= <%=r%>;
 
