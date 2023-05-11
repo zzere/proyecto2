@@ -11,11 +11,14 @@ public class Informante extends Usuario{
     public Informante() {
     }
 
-    public Informante(String telefono, String genero, int edad, int id, String nombre, String apellido, String correo, String contraseña) {
+
+
+    public Informante(String telefono, int id, String nombre, String apellido, String correo, String contraseña) {
         super(id, nombre, apellido, correo, contraseña);
         this.telefono = telefono;
-        
     }
+     
+    
 
     public String getTelefono() {
         return telefono;
