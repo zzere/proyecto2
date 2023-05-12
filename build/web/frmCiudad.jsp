@@ -46,7 +46,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         %>
     </div>
     
-    <a href="index.jsp">home</a>
+    <a href="homeAdmin.jsp">home</a>
 
 </body>
 

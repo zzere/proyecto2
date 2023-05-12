@@ -37,7 +37,7 @@
             <input type="submit" value="Decrementar robo">
         </form>
             
-        <a href="index.jsp">home</a>
+        <a href="homeAdmin.jsp">home</a>
         <% 
             String mensaje= request.getParameter("mensaje");
             if(mensaje!= null){

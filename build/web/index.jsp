@@ -24,11 +24,11 @@
             
             <ul>
                 <h1>Mira los robos en tu ciudad</h1>
-                <li><a href="frmCiudad.jsp">Registrar Ciudad</a></li>
-                <li><a href="frmRobo.jsp">Reportar Robo</a></li>
-                <li><a href="decrementarRobo.jsp">Decrementar Robo</a></li>
-                <li><a href="eliminarCiudad.jsp">Eliminar ciudad</a></li>
+                <p>Para reportar un robo en tu ciudad debes registrarte como usuario:</p><br>
                 <li><a href="robosPorCiudad.jsp">Robos por ciudad</a></li>
+                <li><a href="frmUsuario.jsp">Registrar usuario</a></li>
+                <li><a href="loginUsuario.jsp">Iniciar sesion</a></li>
+                <li><a href="loginAdmin.jsp">Iniciar sesion como Administrador</a></li>
             </ul>
         </div>
         <% 
