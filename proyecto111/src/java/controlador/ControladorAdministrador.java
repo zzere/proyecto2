@@ -11,18 +11,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import modelo.Conexion;
+import modelo.Administrador;
 import modelo.DAOAdministradorImplementacion;
-import modelo.DAOInformanteImplementacion;
 import modelo.Informante;
-import modelo.Robo;
 
 
 
-@WebServlet(name = "ControladorInformante", urlPatterns = {"/ControladorInformante"})
-public class ControladorInformante extends HttpServlet {
 
-    private DAOInformanteImplementacion dInformante = new DAOInformanteImplementacion();
+@WebServlet(name = "ControladorAdministrador", urlPatterns = {"/ControladorAdministrador"})
+public class ControladorAdministrador extends HttpServlet {
+
+
+    
+private DAOAdministradorImplementacion dAdministrador = new DAOAdministradorImplementacion();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -91,35 +92,33 @@ public class ControladorInformante extends HttpServlet {
         String apellido = request.getParameter("txtApellido");
         String correo = request.getParameter("txtCorreo");
         String contraseña = request.getParameter("txtContraseña");
-        String telefono = request.getParameter("txtTelefono");
         
         nombre = nombre.toUpperCase();
         apellido = apellido.toUpperCase();
         correo = correo.toUpperCase();
         contraseña = contraseña.toUpperCase();
-        telefono = telefono.toUpperCase();
         
-        Informante informante = new Informante(telefono, 0, nombre, apellido, correo, contraseña);
+        Administrador administrador = new Administrador(0, nombre, apellido, correo, contraseña);
         
-        boolean agregado = dInformante.registrar(informante);
+        boolean agregado = dAdministrador.registrar(administrador);
 
-        String mensaje = dInformante.getMensaje();
+        String mensaje = dAdministrador.getMensaje();
     }
     
     private void eliminar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         
-        int id = Integer.parseInt(request.getParameter("Informante"));
+        int id = Integer.parseInt(request.getParameter("Administrador"));
         
-        dInformante.eliminar(id);
+        dAdministrador.eliminar(id);
     }
     
     private void actualizar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         
-        int id= Integer.parseInt(request.getParameter("Informante"));
+        int id= Integer.parseInt(request.getParameter("Administrador"));
         
-        dInformante.modificar(id);
+        dAdministrador.modificar(id);
 
     }
 
@@ -130,19 +129,15 @@ public class ControladorInformante extends HttpServlet {
         String correo = request.getParameter("txtCorreo");
         String contraseña = request.getParameter("txtContraseña");
 
-        boolean encontrado = dInformante.verificar(correo, contraseña);
+        boolean encontrado = dAdministrador.verificar(correo, contraseña);
         
         if(encontrado){
-            response.sendRedirect(request.getContextPath() + "/frmRobo.jsp?mensaje="+dInformante.getMensaje());
+            response.sendRedirect(request.getContextPath() + "/homeAdmin.jsp?mensaje="+dAdministrador.getMensaje());
         }
         else{
-            response.sendRedirect(request.getContextPath() + "/index.jsp.jsp?mensaje="+dInformante.getMensaje());
+            response.sendRedirect(request.getContextPath() + "/index.jsp.jsp?mensaje="+dAdministrador.getMensaje());
         }
         
     }
-        
-        
+    
 }
-    
-    
-

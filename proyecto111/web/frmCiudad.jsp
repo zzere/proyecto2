@@ -35,7 +35,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <input type="text" name="txtBarrio" placeholder="Barrio"> <br>
         <input type="submit" value="Registrar" >
     </form>
-
+    
     <br>
     <div>
         <% 
