@@ -103,6 +103,8 @@ private DAOAdministradorImplementacion dAdministrador = new DAOAdministradorImpl
         boolean agregado = dAdministrador.registrar(administrador);
 
         String mensaje = dAdministrador.getMensaje();
+        
+        response.sendRedirect(request.getContextPath() + "/homeAdmin.jsp?mensaje="+dAdministrador.getMensaje());
     }
     
     private void eliminar(HttpServletRequest request, HttpServletResponse response)
@@ -111,6 +113,7 @@ private DAOAdministradorImplementacion dAdministrador = new DAOAdministradorImpl
         int id = Integer.parseInt(request.getParameter("Administrador"));
         
         dAdministrador.eliminar(id);
+        response.sendRedirect(request.getContextPath() + "/homeAdmin.jsp?mensaje="+dAdministrador.getMensaje());
     }
     
     private void actualizar(HttpServletRequest request, HttpServletResponse response)
@@ -119,6 +122,7 @@ private DAOAdministradorImplementacion dAdministrador = new DAOAdministradorImpl
         int id= Integer.parseInt(request.getParameter("Administrador"));
         
         dAdministrador.modificar(id);
+        response.sendRedirect(request.getContextPath() + "/homeAdmin.jsp?mensaje="+dAdministrador.getMensaje());
 
     }
 

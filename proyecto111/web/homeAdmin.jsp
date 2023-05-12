@@ -18,6 +18,7 @@
     <li><a href="eliminarCiudad.jsp">Eliminar ciudad</a></li>
     <li><a href="robosPorCiudad.jsp">Robos por ciudad</a></li>
     <li><a href="frmCiudad.jsp">Registrar Ciudad</a></li>
+    <li><a href="frmAdmin.jsp">Registrar administrador</a></li>
     
     
     </body>
