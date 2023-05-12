@@ -26,6 +26,7 @@ public class DAOAdministradorImplementacion implements DAOAdministrador{
     
     
     
+    @Override
     public boolean registrar(Administrador administrador) {
 
         boolean agregado=false;
@@ -55,10 +56,10 @@ public class DAOAdministradorImplementacion implements DAOAdministrador{
         try {
             ps = miConexion.prepareStatement(sql);
             
-            a.setNombre(rs.getString(2));
-            a.setApellido(rs.getString(3));
-            a.setCorreo(rs.getString(4));
-            a.setContraseña(rs.getString(5));
+            a.setNombre(rs.getString(1));
+            a.setApellido(rs.getString(2));
+            a.setCorreo(rs.getString(3));
+            a.setContraseña(rs.getString(4));
             
             ps.executeUpdate();
             mensaje="administrador actualizado correctamente";

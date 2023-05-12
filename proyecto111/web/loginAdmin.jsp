@@ -3,7 +3,9 @@
     Created on : 12/05/2023, 2:06:56 p. m.
     Author     : juan
 --%>
-
+<%@page import="controlador.*" %>
+<%@page import="modelo.*" %>
+<%@page import="java.sql.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

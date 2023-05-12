@@ -3,7 +3,9 @@
     Created on : 1 may. 2023, 21:21:31
     Author     : sebas
 --%>
-
+<%@page import="controlador.*" %>
+<%@page import="modelo.*" %>
+<%@page import="java.sql.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--

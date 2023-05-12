@@ -3,11 +3,10 @@
     Created on : 2 may. 2023, 16:31:17
     Author     : sebas
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="controlador.*" %>
 <%@page import="modelo.*" %>
 <%@page import="java.sql.*" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
